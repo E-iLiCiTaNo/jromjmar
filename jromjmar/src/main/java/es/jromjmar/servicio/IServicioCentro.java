@@ -1,5 +1,8 @@
 package es.jromjmar.servicio;
 
+import es.jromjmar.centro.modelos.Alumno;
+import es.jromjmar.centro.modelos.Grupo;
+
 import java.util.Date;
 import java.util.List;
 

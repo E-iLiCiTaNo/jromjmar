@@ -1,5 +1,8 @@
 package es.jromjmar.servicio;
 
+import es.jromjmar.centro.modelos.Alumno;
+import es.jromjmar.centro.modelos.Grupo;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +40,7 @@ public class ServicioCentro implements IServicioCentro {
                 throw new ServicioCentroException("Ya existe un alumno con ese id.");
             }
         }
-        Alumno a = new Alumno(id, nombre, fechaNac);
+        Alumno a = Alumno.create(id, nombre, fechaNac);
         alumnos.add(a);
     }
 
