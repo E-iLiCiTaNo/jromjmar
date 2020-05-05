@@ -9,13 +9,14 @@ public interface Alumno {
 
     /**
      * Method to create a new object "Alumno".
+     * @param id "Alumno" id.
      * @param name Name of the "Alumno".
      * @param birthDate "Alumno" birthdate.
      * @param group "Alumno" group.
      * @return
      */
-    static Alumno create(String name, Date birthDate, Grupo group) {
-        return new AlumnoImpl(name, birthDate, group);
+    static Alumno create(int id, String name, Date birthDate, Grupo group) {
+        return new AlumnoImpl(id, name, birthDate, group);
     }
 
     /**
@@ -28,7 +29,7 @@ public interface Alumno {
      * Get the "Alumno" name as String.
      * @return an String with the "Alumno" name.
      */
-    String getNanme();
+    String getName();
 
     /**
      * Get the "Alumno" birth date as a date object.

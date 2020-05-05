@@ -8,15 +8,13 @@ import java.util.List;
 
 public class AlumnoImpl implements Alumno {
 
-    private static int idCounter = -1;
-
     private int id;
     private String name;
     private Date birthDate;
     private Grupo group;
 
-    public AlumnoImpl(String name, Date birthDate, Grupo group) {
-        id = getNewId();
+    public AlumnoImpl(int id, String name, Date birthDate, Grupo group) {
+        this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.group = group;
@@ -26,7 +24,7 @@ public class AlumnoImpl implements Alumno {
         return id;
     }
 
-    public String getNanme() {
+    public String getName() {
         return name;
     }
 
@@ -38,8 +36,4 @@ public class AlumnoImpl implements Alumno {
         return group;
     }
 
-    private static int getNewId() {
-       idCounter++;
-       return idCounter;
-    }
 }
