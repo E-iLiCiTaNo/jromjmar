@@ -8,5 +8,12 @@
     <artifactId>jromjmar</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.intellij/annotations -->
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>annotations</artifactId>
+            <version>12.0</version>
+        </dependency>
+    </dependencies>
 </project>
