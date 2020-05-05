@@ -10,8 +10,8 @@ public interface Grupo {
      * @param isCiclos is "Grupo" a "Ciclo"?
      * @return new "Grupo" object.
      */
-    static Grupo create(String groupName, boolean isCiclos) {
-        return new GrupoImpl(groupName, isCiclos);
+    static Grupo create(int id, String groupName, boolean isCiclos) {
+        return new GrupoImpl(id, groupName, isCiclos);
     }
 
     /**

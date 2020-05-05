@@ -60,6 +60,10 @@ public class VistasAlumno {
 
     private void verAlumnos() {
         List<Alumno> alumnoList = ServicioCentro.getServicioCentro().obtenerAlumnos();
+        if(alumnoList == null) {
+            System.out.println("No hay alumnos.");
+            return;
+        }
         int size = alumnoList.size();
         for(int i = 0; i < size; i++) {
             Alumno al = alumnoList.get(i);
@@ -68,6 +72,13 @@ public class VistasAlumno {
     }
 
     private void eliminarAlumno() {
+        List<Alumno> alumnoList = ServicioCentro.getServicioCentro().obtenerAlumnos();
+        if(alumnoList == null) {
+            System.out.println("No hay alumnos.");
+            return;
+        }
+        int size = alumnoList.size();
+
         System.out.print("ID del alumno para eliminar: ");
         int id = -1;
         String entrada;
@@ -87,8 +98,6 @@ public class VistasAlumno {
             }
         }
 
-        List<Alumno> alumnoList = ServicioCentro.getServicioCentro().obtenerAlumnos();
-        int size = alumnoList.size();
         for(int i = 0; i < size; i++) {
             Alumno al = alumnoList.get(i);
             if(al.getId() == id) {
@@ -104,6 +113,12 @@ public class VistasAlumno {
     }
 
     private void asignarAGrupo() {
+        List<Alumno> alumnoList = ServicioCentro.getServicioCentro().obtenerAlumnos();
+        if(alumnoList == null) {
+            System.out.println("No hay alumnos.");
+            return;
+        }
+        int size = alumnoList.size();
         System.out.print("ID del alumno para agregar grupo: ");
         int id = -1;
         int idGrupo = -1;
@@ -123,7 +138,7 @@ public class VistasAlumno {
                 }
             }
         }
-        while (id == -1) {
+        while (idGrupo == -1) {
             System.out.print("Dime el id del grupo: ");
             entrada = sc.nextLine();
             if (!Utilidades.esEntero(entrada)) {
@@ -137,8 +152,7 @@ public class VistasAlumno {
                 }
             }
         }
-        List<Alumno> alumnoList = ServicioCentro.getServicioCentro().obtenerAlumnos();
-        int size = alumnoList.size();
+
         for(int i = 0; i < size; i++) {
             Alumno al = alumnoList.get(i);
             if(al.getId() == id) {
@@ -181,12 +195,22 @@ public class VistasAlumno {
         }
         while (fechaNac == null) {
             String fecha = "";
-            while (!isThisDateValid(fecha, "dd/MM/yyyy")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            boolean valid = false;
+            while (!valid) {
                 System.out.print("Introduce la fecha de nacimiento(dd/MM/yyyy): ");
                 fecha = sc.nextLine();
-                fechaNac = Utilidades.obtenerFecha(fecha);
-                if(!isThisDateValid(fecha, "dd/MM/yyyy"))
+                try {
+                    fechaNac = sdf.parse(fecha);
+                    valid = true;
+                } catch (Exception e) {
+                    valid = false;
+                    fechaNac = null;
+                }
+                if (!valid)
                     System.out.println("Fecha no valida.");
+                else
+                    fechaNac = Utilidades.obtenerFecha(fecha);
             }
         }
 
@@ -225,37 +249,32 @@ public class VistasAlumno {
         }
         while (fechaNac == null) {
             String fecha = "";
-            while (!isThisDateValid(fecha, "dd/MM/yyyy")) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            boolean valid = false;
+            while (!valid) {
                 System.out.print("Introduce la fecha de nacimiento(dd/MM/yyyy): ");
                 fecha = sc.nextLine();
-                if(!isThisDateValid(fecha, "dd/MM/yyyy"))
+                try {
+                    fechaNac = sdf.parse(fecha);
+                    valid = true;
+                } catch (Exception e) {
+                    valid = false;
+                    fechaNac = null;
+                }
+                if (!valid)
                     System.out.println("Fecha no valida.");
+                else
+                    fechaNac = Utilidades.obtenerFecha(fecha);
             }
         }
 
         try {
+            System.out.println("Usuario añadido.");
             ServicioCentro.getServicioCentro().nuevoAlumno(id, nombre, fechaNac);
         } catch (ServicioCentroException e) {
             System.out.println("No se ha podido añadir el alumno.");
         }
 
-    }
-
-    private boolean isThisDateValid(String dateToValidate, String dateFromat){
-        if(dateToValidate == null){
-            return false;
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
-        sdf.setLenient(false);
-        try {
-            //if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
-            System.out.println(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
     }
 
 
