@@ -1,5 +1,8 @@
 package es.jromjmar.Main;
 
+import es.jromjmar.vistas.VistasAlumno;
+import es.jromjmar.vistas.VistasGrupo;
+
 import java.util.Scanner;
 
 public class Main {

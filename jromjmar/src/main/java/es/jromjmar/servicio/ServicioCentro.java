@@ -40,7 +40,8 @@ public class ServicioCentro implements IServicioCentro {
                 throw new ServicioCentroException("Ya existe un alumno con ese id.");
             }
         }
-        Alumno a = Alumno.create(id, nombre, fechaNac);
+        Alumno a = Alumno.create(id, nombre, fechaNac, null);
+
         alumnos.add(a);
     }
 
